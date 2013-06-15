@@ -121,9 +121,6 @@ Array.prototype.myMap = function(fun) {
 	return finalArray;
 };
 
-console.log(arr.myMap(function(thing){
-	return thing.toUpperCase();
-}));
 
 
 var add = function (thing1, thing2) {
@@ -141,18 +138,98 @@ Array.prototype.myInject = function (fun) {
 	return value;
 };
 
-var a = [1,2,3,4];
-
-console.log(a.myInject(add));
 
 
+Array.prototype.bubbleSort = function() {
+
+	var sorted = false;
+
+	while (!sorted) {
+		sorted = true;
+
+		for (i = 0; i < this.length - 1; i++) {
+
+			if (this[i] > this[i + 1]) {
+
+				var placeHolder = this[i];
+				this[i] = this[i + 1];
+				this[i + 1] = placeHolder;
+				sorted = false;
+			};
+		}
+	}
+	return this;
+};
 
 
+String.prototype.substrings = function() {
+	var finalArray = [];
+	for (i = 0; i < this.length; i++) {
+		for (j = i; j < this.length; j++) {
+			finalArray.push(this.slice(i, j+1));
+		}
+	}
+	return finalArray;
+};
 
 
+var factorial = function(num) {
+	if (num === 1) {
+		return num;
+	} else {
+		return (num * factorial(num - 1));
+	}
+};
+
+var range = function(start, end) {
+	if (start === end) {
+		return [end];
+	} else {
+		return [start] + range(start + 1, end);
+	}
+};
+
+Array.prototype.sumMe = function () {
+	if (this.length === 1) {
+		return this[0];
+	} else {
+		var arr = this.slice(1, this.length);
+		return this[0] + arr.sumMe();
+	}
+};
+
+var a = [2,1,4,3, 6, 5, 3];
+var b = [1, 2, 3, 4]
+
+var power = function (base, exponent){
+	if (exponent===0){
+		return 1;
+	} else {
+		return base* power(base, exponent-1);
+	}
+};
+
+var power2 = function (base, exponent) {
+	if (exponent === 0){
+		return 1;
+	} else if (exponent%2 === 0) {
+		return Math.pow(power2(base, exponent/2), 2);
+	} else {
+		return base * Math.pow(power2(base, (((exponent - 1)/2))), 2);
+	}
+}
 
 
+var fibo = function (num) {
 
+	if (num === 0){
+		return [];
+	} else if (num === 1){
+		return [1];
+	} else if (num === 2){
+		return [1, 1];
+	} else {
+		return fib(num - 1) + [fib(num - 1).last + fib(num - 1).second_to_last];
+	}
 
-
-
+};
